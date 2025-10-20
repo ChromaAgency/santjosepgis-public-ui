@@ -223,10 +223,10 @@ interface MapComponentProps {
                 type: feature.properties.type,
                 data: feature.properties.data,
             };
-
+            
             // Agregar popup
             layer.bindPopup(`
-                <div class="p-2">
+                <div class="p-2" id="popup-${feature.properties.id}">
                 <h3 class="font-bold text-sm">${feature.properties.name}</h3>
                 <p class="text-xs text-gray-600 mt-1">${feature.properties.description}</p>
                 <p class="text-xs text-gray-500 mt-1">
@@ -253,9 +253,17 @@ interface MapComponentProps {
                 }
                 });
 
-        // Centrar el mapa en la ubicación seleccionada
+        // Centrar el mapa en la ubicación seleccionada y abrir popup después de que la capa esté en el mapa
         if (selectedLocation) {
             mapInstanceRef.current.setView([selectedLocation.lat, selectedLocation.lng], 15);
+            
+            // Abrir popup para la ubicación seleccionada
+            geoJsonLayer.eachLayer(function (layer: any) {
+                if (layer.feature && layer.feature.properties.id === selectedLocation.id) {
+                    console.log('Abriendo popup para la ubicación seleccionada:', layer);
+                    layer.openPopup();
+                }
+            });
         }
     }
     useEffect(() => {

@@ -43,7 +43,6 @@ export const placesService = {
     }
     
     const data = await response.json()
-    console.log('Search API Response:', data) // Debug log
     
     if (data.type === 'FeatureCollection' && data.features) {
       return data.features
@@ -65,7 +64,6 @@ export const placesService = {
     }
     
     const data = await response.json()
-    console.log('Category API Response:', data) // Debug log
     
     if (data.type === 'FeatureCollection' && data.features) {
       return data.features

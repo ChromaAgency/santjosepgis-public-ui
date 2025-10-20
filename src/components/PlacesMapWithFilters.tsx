@@ -33,7 +33,6 @@ export default function PlacesMapWithFilters({
     totalCount,
     filteredCount 
   } = useFilteredPlaces({ searchTerm, typeFilter });
-  console.log('Well Locations:', filteredPlaces);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);

@@ -33,7 +33,6 @@ export const useFilteredPlaces = ({ searchTerm = '', typeFilter = 'all' }: UseFi
 
     return filtered
   }()
-  console.log('Filtered Places:', filteredPlaces, allPlaces) // Debug log
   return {
     places: filteredPlaces,
     allPlaces,
