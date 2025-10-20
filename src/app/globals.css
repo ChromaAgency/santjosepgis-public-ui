@@ -24,3 +24,60 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Estilos para los marcadores personalizados */
+.custom-div-icon {
+  background: none;
+  border: none;
+}
+
+.marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #00b3ff;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+  animation: bounce 1s infinite alternate;
+  box-shadow: 0 2px 10px rgba(0, 179, 255, 0.5);
+}
+
+.marker-pin::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  margin: 8px 0 0 8px;
+  background: #fff;
+  position: absolute;
+  border-radius: 50%;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0) rotate(-45deg); }
+  100% { transform: translateY(-10px) rotate(-45deg); }
+}
+
+/* Marcadores por tipo */
+.marker-water-well {
+  background: #00b3ff;
+}
+
+.marker-office {
+  background: #ff6b35;
+}
+
+.marker-store {
+  background: #4ecdc4;
+}
+
+.marker-warehouse {
+  background: #ffe66d;
+}
+
+.marker-other {
+  background: #a8e6cf;
+}
