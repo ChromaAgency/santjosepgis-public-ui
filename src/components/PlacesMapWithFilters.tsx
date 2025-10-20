@@ -150,7 +150,7 @@ export default function PlacesMapWithFilters({
                 {searchTerm && (
                   <div className="flex items-center justify-between px-3 py-2 rounded-md bg-blue-50 border border-blue-200">
                     <span className="text-sm text-blue-800">
-                      Búsqueda: "{searchTerm}"
+                      Búsqueda: &quot;{searchTerm}&quot;
                     </span>
                     <button
                       onClick={() => setSearchTerm('')}
