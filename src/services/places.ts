@@ -1,6 +1,6 @@
 import { Place } from '../types/location'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_BASE_URL =  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
 export const placesService = {
   async getPlaces(): Promise<Place[]> {
@@ -9,19 +9,15 @@ export const placesService = {
       throw new Error(`Error fetching places: ${response.status}`)
     }
     
-    const data = await response.json()
-    console.log('API Response:', data) // Debug log
+    const rawdata = await response.json()
+    const data = rawdata.results
     
-    // Django REST Framework con GeoFeatureModelSerializer puede devolver:
-    // 1. FeatureCollection con features array
     if (data.type === 'FeatureCollection' && data.features) {
       return data.features
     }
-    // 2. Array directo de features
     if (Array.isArray(data)) {
       return data
     }
-    // 3. Objeto con results (paginación)
     if (data.results && Array.isArray(data.results)) {
       return data.results
     }

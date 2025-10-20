@@ -18,7 +18,6 @@ export const usePlaces = () => {
   return useQuery({
     queryKey: PLACES_QUERY_KEYS.lists(),
     queryFn: placesService.getPlaces,
-    staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }
 

@@ -39,6 +39,7 @@ export default function PlacesMap({
     data: JSON.stringify(place.properties)
   }));
 
+
   const handleLocationSelect = (location: WellLocation) => {
     setSelectedLocation(location);
   };

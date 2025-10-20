@@ -12,11 +12,11 @@ interface UseFilteredPlacesParams {
 export const useFilteredPlaces = ({ searchTerm = '', typeFilter = 'all' }: UseFilteredPlacesParams = {}) => {
   const { data: allPlaces = [], isLoading, error, refetch } = usePlaces()
 
-  const filteredPlaces = useMemo(() => {
+  const filteredPlaces =  function() {
     let filtered = allPlaces
 
     // Filtrar por búsqueda
-    if (searchTerm.trim()) {
+    if (searchTerm && searchTerm.trim()) {
       const searchLower = searchTerm.toLowerCase().trim()
       filtered = filtered.filter(place =>
         place.properties.name.toLowerCase().includes(searchLower) ||
@@ -32,8 +32,8 @@ export const useFilteredPlaces = ({ searchTerm = '', typeFilter = 'all' }: UseFi
     }
 
     return filtered
-  }, [allPlaces, searchTerm, typeFilter])
-
+  }()
+  console.log('Filtered Places:', filteredPlaces, allPlaces) // Debug log
   return {
     places: filteredPlaces,
     allPlaces,
