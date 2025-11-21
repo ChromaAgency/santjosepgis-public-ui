@@ -62,7 +62,15 @@ interface MapComponentProps {
     };
     // Crear icono personalizado
     const createCustomIcon = (type: string, isSelected = false) => {
-        const color = '#a8e6cf';
+        // Colorcitos con javaescript
+        const normalizedType = (type || '').toLowerCase();
+        const color =
+            normalizedType === 'bar' ? '#f0600dff' :
+            normalizedType === 'restaurant' ? '#FACC15' :
+            normalizedType === 'hotel' ? '#22c55e' :
+            normalizedType === 'sport' ? '#3b82f6' :
+            '#a8e6cf';
+
         const size = isSelected ? 35 : 30;
         
         return L.divIcon({
