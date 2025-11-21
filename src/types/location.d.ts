@@ -16,10 +16,11 @@ export interface Place {
     coordinates: [number, number]; // [lng, lat]
   };
   properties: {
-    id: number;
     name: string;
     description: string;
     type: string;
+    // La API pública incluye muchos campos adicionales bajo `properties.data`.
+    // Permitimos propiedades extra sin tipar aquí.
   };
 }
 
@@ -28,7 +29,16 @@ export interface PlacesApiResponse {
   features: Place[];
 }
 
-export type LocationType = 'water_well' | 'office' | 'store' | 'warehouse' | 'other';
+export type LocationType =
+  | 'water_well'
+  | 'office'
+  | 'store'
+  | 'warehouse'
+  | 'bar'
+  | 'restaurant'
+  | 'hotel'
+  | 'sport'
+  | 'other';
 
 export interface LocationFilter {
   typeFilter: LocationType[];

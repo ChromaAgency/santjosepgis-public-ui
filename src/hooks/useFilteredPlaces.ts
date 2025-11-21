@@ -1,8 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
 import { usePlaces } from './usePlaces'
-import { Place } from '../types/location'
 
 interface UseFilteredPlacesParams {
   searchTerm?: string

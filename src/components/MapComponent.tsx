@@ -1,7 +1,7 @@
 'use client';
 
-import { useContext, useEffect, useRef } from 'react';
-import L, { map } from 'leaflet';
+import { useContext, useEffect} from 'react';
+import L from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
@@ -32,11 +32,8 @@ interface MapComponentProps {
     isAdding = false,
 
 }: MapComponentProps) {
-    const { mapRef,
-        mapInstanceRef,
-        geoJsonLayerRef,
-        drawnItemsRef,
-        mapControlsRef } = useContext(MapContext);  
+    // @ts-expect-error --- IGNORE ---
+    const { mapRef, mapInstanceRef, geoJsonLayerRef, drawnItemsRef, mapControlsRef } = useContext(MapContext);  
     // Convertir locations array a GeoJSON FeatureCollection
     const locationsToGeoJSON = (locations: WellLocation[]) => {
         return {
@@ -62,7 +59,15 @@ interface MapComponentProps {
     };
     // Crear icono personalizado
     const createCustomIcon = (type: string, isSelected = false) => {
-        const color = '#a8e6cf';
+        // Colorcitos con javaescript
+        const normalizedType = (type || '').toLowerCase();
+        const color =
+            normalizedType === 'bar' ? '#f0600dff' :
+            normalizedType === 'restaurant' ? '#FACC15' :
+            normalizedType === 'hotel' ? '#22c55e' :
+            normalizedType === 'sport' ? '#3b82f6' :
+            '#a8e6cf';
+
         const size = isSelected ? 35 : 30;
         
         return L.divIcon({

@@ -1,8 +1,7 @@
 'use client'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery,  useQueryClient } from '@tanstack/react-query'
 import { placesService } from '../services/places'
-import { Place } from '../types/location'
 
 // Query keys
 export const PLACES_QUERY_KEYS = {
