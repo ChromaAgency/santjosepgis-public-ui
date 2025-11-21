@@ -1,12 +1,16 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 const EXTERNAL_API_BASE = 'https://santjosepgis.chroma.agency'
 
+type Params = {params: Promise<{ id: string }>};
+
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: Params 
 ) {
-  const id = params.id
+  const params = context.params;
+  const {id} = await params;
+
   const target = `${EXTERNAL_API_BASE}/places/${id}/`
 
   try {

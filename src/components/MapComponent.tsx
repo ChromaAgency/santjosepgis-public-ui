@@ -1,7 +1,7 @@
 'use client';
 
-import { useContext, useEffect, useRef } from 'react';
-import L, { map } from 'leaflet';
+import { useContext, useEffect} from 'react';
+import L from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
@@ -32,11 +32,8 @@ interface MapComponentProps {
     isAdding = false,
 
 }: MapComponentProps) {
-    const { mapRef,
-        mapInstanceRef,
-        geoJsonLayerRef,
-        drawnItemsRef,
-        mapControlsRef } = useContext(MapContext);  
+    // @ts-expect-error --- IGNORE ---
+    const { mapRef, mapInstanceRef, geoJsonLayerRef, drawnItemsRef, mapControlsRef } = useContext(MapContext);  
     // Convertir locations array a GeoJSON FeatureCollection
     const locationsToGeoJSON = (locations: WellLocation[]) => {
         return {

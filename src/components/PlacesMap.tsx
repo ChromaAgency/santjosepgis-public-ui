@@ -16,11 +16,8 @@ interface PlacesMapProps {
 }
 
 export default function PlacesMap({
-  apiBaseUrl,
   initialCenter = [38.9368719,1.2610344], // Coordenadas de Sant Josep de sa Talaia
   initialZoom = 12,
-  typeFilter = 'all',
-  searchTerm = '',
   className = 'w-full h-96'
 }: PlacesMapProps) {
   const [selectedLocation, setSelectedLocation] = useState<WellLocation | null>(null);

@@ -1,7 +1,6 @@
 'use client';
 
 import { usePlaces } from '@/hooks/usePlaces';
-import { usePlaceTypes } from '@/hooks/usePlaceTypes';
 
 interface PlacesStatsProps {
   apiBaseUrl?: string;
@@ -9,7 +8,6 @@ interface PlacesStatsProps {
 }
 
 export default function PlacesStats({ 
-  apiBaseUrl,
   className = ''
 }: PlacesStatsProps) {
   const { data: places = [], isLoading: loading, error } = usePlaces();

@@ -1,12 +1,10 @@
-import QCLogo from '@/img/QCLogo.png';
+// import QCLogo from '@/img/QCLogo.png';
 import N8Logo from '@/img/N8Logo.png';
 import Image from 'next/image';
 
 
 export default function Header() {
   const logo = process.env.NEXT_PUBLIC_THEME ? N8Logo : N8Logo;
-  const inactiveClass = "text-muted hover:text-white transition-colors"
-  const activeClass = "text-white border-b-2 border-primary pb-1 transition-colors hover:text-primary"
   return (
     <header className="bg-black shadow-lg">
       <div className="px-8 py-4 flex justify-between items-center">
