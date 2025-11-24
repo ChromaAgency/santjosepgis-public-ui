@@ -101,19 +101,7 @@ export default function FilteredPlacesMap({
         />
       </MapProvider>
       
-      {/* Panel de información del lugar seleccionado */}
-      {selectedLocation && (
-        <div className="mt-4 p-4 bg-white rounded-lg shadow-md border">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            {selectedLocation.name}
-          </h3>
-          <p className="text-gray-600 mb-2">{selectedLocation.description}</p>
-          <div className="text-sm text-gray-500">
-            <p><strong>Tipo:</strong> {selectedLocation.type}</p>
-            <p><strong>Coordenadas:</strong> {selectedLocation.lat.toFixed(6)}, {selectedLocation.lng.toFixed(6)}</p>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 }
