@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { MapContext } from './MapProvider';
 import { WellLocation } from '@/types/location';
+import {marked} from 'marked';
 
 interface MapComponentProps {
     initialMapLocation: [number, number];
@@ -228,12 +229,12 @@ interface MapComponentProps {
                 type: feature.properties.type,
                 data: feature.properties.data,
             };
-            
+            const desc = marked.parse(feature.properties.description);
             // Agregar popup
             layer.bindPopup(`
                 <div class="p-2" id="popup-${feature.properties.id}">
                 <h3 class="font-bold text-sm">${feature.properties.name}</h3>
-                <p class="text-xs text-gray-600 mt-1">${feature.properties.description}</p>
+                <p class="text-xs text-gray-600 mt-1">${desc}</p>
               
                 </div>
             `);
