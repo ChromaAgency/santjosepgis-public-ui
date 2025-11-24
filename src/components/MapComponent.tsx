@@ -103,7 +103,7 @@ interface MapComponentProps {
         mapInstanceRef.current = map;
 
         // Añadir capa de mapa oscuro
-        const mapAttribution = process.env.NEXT_PUBLIC_THEME ? 
+        const mapAttribution = process.env.NEXT_PUBLIC_THEME === 'qc' ? 
             ' <a href="https://n8.com/attributions">N8 Maps</a>' : 
             ' <a href="https://quantum.com/attributions">Quantum Maps</a>';
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -234,9 +234,7 @@ interface MapComponentProps {
                 <div class="p-2" id="popup-${feature.properties.id}">
                 <h3 class="font-bold text-sm">${feature.properties.name}</h3>
                 <p class="text-xs text-gray-600 mt-1">${feature.properties.description}</p>
-                <p class="text-xs text-gray-500 mt-1">
-                    Coordenadas: ${feature.properties.lat.toFixed(6)}, ${feature.properties.lng.toFixed(6)}
-                </p>
+              
                 </div>
             `);
 
