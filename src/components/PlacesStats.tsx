@@ -1,7 +1,6 @@
 'use client';
 
 import { usePlaces } from '@/hooks/usePlaces';
-import { usePlaceTypes } from '@/hooks/usePlaceTypes';
 
 interface PlacesStatsProps {
   apiBaseUrl?: string;
@@ -9,7 +8,6 @@ interface PlacesStatsProps {
 }
 
 export default function PlacesStats({ 
-  apiBaseUrl,
   className = ''
 }: PlacesStatsProps) {
   const { data: places = [], isLoading: loading, error } = usePlaces();
@@ -57,23 +55,29 @@ export default function PlacesStats({
           </div>
 
           {/* Tipos más comunes - solo mostrar top 2 */}
-          {topTypes.slice(0, 2).map(([type, count], index) => (
-            <div key={type} className="flex items-center gap-1">
-              <span className="text-gray-600">{type}:</span>
-              <span className={`font-bold ${
-                index === 0 ? 'text-green-600' : 'text-yellow-600'
-              }`}>
-                {count as number}
-              </span>
-            </div>
-          ))}
-
+{topTypes.map(([type, count], index) => (
+  <div key={type} className="flex items-center gap-1">
+    <span className="text-gray-600">{type}:</span>
+    <span 
+      className={`font-bold ${
+        index === 0 ? 'text-green-600' :
+        index === 1 ? 'text-yellow-600' :
+        index === 3 ? 'text-purple-600' :
+        index === 4 ? 'text-orange-600' :
+        index !== 2 ? 'text-gray-600' : ''
+      }`}
+      style={index === 2 ? { color: '#f0600d' } : undefined}
+    >
+      {count as number}
+    </span>
+  </div>
+))}
           {/* Mostrar "..." si hay más tipos */}
-          {Object.keys(typeStats).length > 2 && (
+          {/* {Object.keys(typeStats).length > 2 && (
             <span className="text-gray-400 text-xs">
               +{Object.keys(typeStats).length - 2} más
             </span>
-          )}
+          )} */}
         </div>
       </div>
     </div>

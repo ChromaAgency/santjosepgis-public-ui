@@ -1,12 +1,13 @@
 'use client';
 
-import { useContext, useEffect, useRef } from 'react';
-import L, { map } from 'leaflet';
+import { useContext, useEffect} from 'react';
+import L from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { MapContext } from './MapProvider';
 import { WellLocation } from '@/types/location';
+import {marked} from 'marked';
 
 interface MapComponentProps {
     initialMapLocation: [number, number];
@@ -32,11 +33,8 @@ interface MapComponentProps {
     isAdding = false,
 
 }: MapComponentProps) {
-    const { mapRef,
-        mapInstanceRef,
-        geoJsonLayerRef,
-        drawnItemsRef,
-        mapControlsRef } = useContext(MapContext);  
+    // @ts-expect-error --- IGNORE ---
+    const { mapRef, mapInstanceRef, geoJsonLayerRef, drawnItemsRef, mapControlsRef } = useContext(MapContext);  
     // Convertir locations array a GeoJSON FeatureCollection
     const locationsToGeoJSON = (locations: WellLocation[]) => {
         return {
@@ -62,7 +60,15 @@ interface MapComponentProps {
     };
     // Crear icono personalizado
     const createCustomIcon = (type: string, isSelected = false) => {
-        const color = '#a8e6cf';
+        // Colorcitos con javaescript
+        const normalizedType = (type || '').toLowerCase();
+        const color =
+            normalizedType === 'bar' ? '#f0600dff' :
+            normalizedType === 'restaurant' ? '#FACC15' :
+            normalizedType === 'hotel' ? '#22c55e' :
+            normalizedType === 'sport' ? '#3b82f6' :
+            '#a8e6cf';
+
         const size = isSelected ? 35 : 30;
         
         return L.divIcon({
@@ -98,7 +104,7 @@ interface MapComponentProps {
         mapInstanceRef.current = map;
 
         // Añadir capa de mapa oscuro
-        const mapAttribution = process.env.NEXT_PUBLIC_THEME ? 
+        const mapAttribution = process.env.NEXT_PUBLIC_THEME === 'qc' ? 
             ' <a href="https://n8.com/attributions">N8 Maps</a>' : 
             ' <a href="https://quantum.com/attributions">Quantum Maps</a>';
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
@@ -223,15 +229,13 @@ interface MapComponentProps {
                 type: feature.properties.type,
                 data: feature.properties.data,
             };
-            
+            const desc = marked.parse(feature.properties.description);
             // Agregar popup
             layer.bindPopup(`
                 <div class="p-2" id="popup-${feature.properties.id}">
                 <h3 class="font-bold text-sm">${feature.properties.name}</h3>
-                <p class="text-xs text-gray-600 mt-1">${feature.properties.description}</p>
-                <p class="text-xs text-gray-500 mt-1">
-                    Coordenadas: ${feature.properties.lat.toFixed(6)}, ${feature.properties.lng.toFixed(6)}
-                </p>
+                <p class="text-xs text-gray-600 mt-1">${desc}</p>
+              
                 </div>
             `);
 

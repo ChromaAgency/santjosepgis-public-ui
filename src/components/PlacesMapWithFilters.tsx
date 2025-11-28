@@ -13,7 +13,6 @@ interface PlacesMapWithFiltersProps {
 }
 
 export default function PlacesMapWithFilters({
-  apiBaseUrl,
   initialCenter = [38.9368719,1.2610344], // Coordenadas de Sant Josep de sa Talaia
   initialZoom = 12,
   className = 'w-full'

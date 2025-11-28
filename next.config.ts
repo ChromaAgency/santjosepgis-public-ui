@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Sin rewrites: usaremos rutas API internas `/api/places` como proxy
 };
 
 export default nextConfig;
